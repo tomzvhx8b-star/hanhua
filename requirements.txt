@@ -61,7 +61,7 @@ pillow==10.4.0 ; python_full_version < '3.9'
     # via pagermaid-pyro
 pillow==11.3.0 ; python_full_version >= '3.9'
     # via pagermaid-pyro
-psutil==7.0.0
+psutil==7.2.0
     # via pagermaid-pyro
 pyaes==1.6.1
     # via pyrogram
