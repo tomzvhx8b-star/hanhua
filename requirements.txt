@@ -55,7 +55,7 @@ jinja2==3.1.6
     # via amis-python
 markupsafe==2.1.5 ; python_full_version < '3.9'
     # via jinja2
-markupsafe==3.0.2 ; python_full_version >= '3.9'
+markupsafe==3.0.3 ; python_full_version >= '3.9'
     # via jinja2
 pillow==10.4.0 ; python_full_version < '3.9'
     # via pagermaid-pyro
