@@ -47,7 +47,7 @@ httpx==0.28.1
     # via pagermaid-pyro
 humanfriendly==10.0
     # via coloredlogs
-idna==3.10
+idna==3.11
     # via
     #   anyio
     #   httpx
