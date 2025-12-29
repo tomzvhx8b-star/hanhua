@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <title>QR Code Login - PagerMaid-Pyro</title>
+    <title>二维码登录 - PagerMaid-Pyro</title>
     <style>
         img {
             display: inline-block!important;
@@ -23,27 +23,27 @@
         <div class="col-md-6 col-lg-4">
             <div class="card" style="">
                 <div class="card-header bg-dark text-white text-center">
-                    <h3 class="mb-0">QR Code Login</h3>
+                    <h3 class="mb-0">二维码登录</h3>
                 </div>
                 <div class="card-body" style="display: block" id="qrDiv">
                     <div id="qr" class="text-center mb-0"></div>
-                    <p class="text-center mb-0">Scan the QR code above to log in.</p>
+                    <p class="text-center mb-0">请扫描上方二维码完成登录。</p>
                 </div>
                 <div style="margin-left: 10%; width: 80%; display: block" class="text-center mb-3" id="pwdDiv">
                     <form id="pwdForm">
                         <div class="mb-3" id="pwdHint">
-                            <label for="hint" class="form-label">Hint</label>
+                            <label for="hint" class="form-label">提示</label>
                             <textarea class="form-control" id="hint" name="hint" disabled></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">密码</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
                         <div class="mb-3">
-                            <label for="confirm-password" class="form-label">Confirm Password</label>
+                            <label for="confirm-password" class="form-label">确认密码</label>
                             <input type="password" class="form-control" id="confirm-password" name="confirm-password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary" >Submit</button>
+                        <button type="submit" class="btn btn-primary" >提交</button>
                     </form>
                 </div>
             </div>
@@ -58,7 +58,7 @@
 
             <!-- 模态框头部 -->
             <div class="modal-header">
-                <h4 class="modal-title">Notice</h4>
+                <h4 class="modal-title">提示</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 

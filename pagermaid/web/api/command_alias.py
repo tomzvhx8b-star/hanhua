@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse
 
 from pagermaid.common.alias import AliasManager
 from pagermaid.web.api.utils import authentication
+from pagermaid.utils._config_utils import lang
 
 route = APIRouter()
 
@@ -28,9 +29,9 @@ async def add_command_alias(data: dict):
     data = data["items"]
     try:
         await AliasManager.save_from_web(data)
-        return {"status": 0, "msg": "命令别名保存成功"}
+        return {"status": 0, "msg": lang('web_command_alias_save_success')}
     except Exception:
-        return {"status": 1, "msg": "命令别名保存失败"}
+        return {"status": 1, "msg": lang('web_command_alias_save_failed')}
 
 
 @route.get(
@@ -40,7 +41,7 @@ async def test_command_alias(message: str):
     alias = AliasManager()
     return {
         "status": 0,
-        "msg": "测试成功",
+        "msg": lang('web_test_success'),
         "data": {
             "new_msg": alias.test_alias(message),
         },

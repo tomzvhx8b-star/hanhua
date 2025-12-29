@@ -70,23 +70,23 @@ web_login_html = get_web_login_html()
 @route.get("/web_login", response_class=JSONResponse, dependencies=[authentication()])
 async def web_login_qrcode():
     if web_login.has_login():
-        return {"status": 0, "msg": "已登录"}
+        return {"status": 0, "msg": lang('web_login_logged')}
     try:
         await web_login.connect()
         if not web_login.is_authorized:
             await authorize_by_qrcode_web(bot)
             web_login.is_authorized = True
         await web_login.init()
-        return {"status": 0, "msg": "登录成功"}
+        return {"status": 0, "msg": lang('web_login_success')}
     except QRCodeWebCodeError as e:
         web_login.need_password = False
-        return {"status": 1, "msg": "未扫码", "content": e.code}
+        return {"status": 1, "msg": lang('web_login_no_qrcode'), "content": e.code}
     except QRCodeWebNeedPWDError as e:
         web_login.need_password = True
         web_login.password_hint = e.hint or ""
-        return {"status": 2, "msg": "需要密码", "content": web_login.password_hint}
+        return {"status": 2, "msg": lang('web_login_need_password'), "content": web_login.password_hint}
     except AuthTokenExpired:
-        return {"status": 3, "msg": "登录状态过期，请重新扫码登录"}
+        return {"status": 3, "msg": lang('web_login_expired')}
     except BadRequest as e:
         return {"status": 3, "msg": e.MESSAGE}
     except Exception as e:
@@ -96,22 +96,22 @@ async def web_login_qrcode():
 @route.post("/web_login", response_class=JSONResponse, dependencies=[authentication()])
 async def web_login_password(user: UserModel):
     if web_login.has_login():
-        return {"status": 0, "msg": "已登录"}
+        return {"status": 0, "msg": lang('web_login_logged')}
     if not web_login.need_password:
-        return {"status": 0, "msg": "无需密码"}
+        return {"status": 0, "msg": lang('web_login_no_password_needed')}
     try:
         await authorize_by_qrcode_web(bot, user.password)
         web_login.is_authorized = True
         await web_login.init()
-        return {"status": 0, "msg": "登录成功"}
+        return {"status": 0, "msg": lang('web_login_success')}
     except QRCodeWebCodeError as e:
-        return {"status": 1, "msg": "需要重新扫码", "content": e.code}
+        return {"status": 1, "msg": lang('web_login_relogin'), "content": e.code}
     except QRCodeWebNeedPWDError as e:
         web_login.need_password = True
-        return {"status": 2, "msg": "密码错误", "content": e.hint or ""}
+        return {"status": 2, "msg": lang('web_login_wrong_password'), "content": e.hint or ""}
     except AuthTokenExpired:
         web_login.need_password = False
-        return {"status": 3, "msg": "登录状态过期，请重新扫码登录"}
+        return {"status": 3, "msg": lang('web_login_expired')}
     except BadRequest as e:
         return {"status": 3, "msg": e.MESSAGE}
     except Exception as e:

@@ -14,99 +14,96 @@ from pagermaid.utils.bot_utils import log
 async def userid(message: Message):
     """Query the UserID of the sender of the message you replied to."""
     reply = message.reply_to_message
-    text = f"Message ID: `{str(message.id)}" + "`\n\n"
-    text += "**Chat**\nid:`" + str(message.chat.id) + "`\n"
+    text = f"{lang('id_message_id')}: `{str(message.id)}`\n\n"
+    text += f"**{lang('id_chat')}**\n{lang('id_chat_id')}: `{str(message.chat.id)}`\n"
     msg_from = message.chat
     if msg_from.type == ChatType.PRIVATE:
         try:
-            text += f"first_name: `{msg_from.first_name}" + "`\n"
+            text += f"{lang('id_first_name')}: `{msg_from.first_name}`\n"
         except TypeError:
-            text += "**死号**\n"
+            text += f"**{lang('id_da')}**\n"
         if msg_from.last_name:
-            text += f"last_name: `{msg_from.last_name}" + "`\n"
+            text += f"{lang('id_last_name')}: `{msg_from.last_name}`\n"
         if msg_from.username:
-            text += f"username: @{msg_from.username}" + "\n"
+            text += f"{lang('id_username')}: @{msg_from.username}\n"
     if msg_from.type in [ChatType.SUPERGROUP, ChatType.CHANNEL]:
-        text += f"title: `{msg_from.title}" + "`\n"
+        text += f"{lang('id_title')}: `{msg_from.title}`\n"
         if message.topic:
-            text += f"topic title: `{message.topic.title}`\n"
-            text += f"topic ID: `{message.topic.id}`\n"
+            text += f"{lang('id_topic_title')}: `{message.topic.title}`\n"
+            text += f"{lang('id_topic_id')}: `{message.topic.id}`\n"
         try:
             if msg_from.username:
-                text += f"username: @{msg_from.username}" + "\n"
+                text += f"{lang('id_username')}: @{msg_from.username}\n"
         except AttributeError:
             return await message.edit(lang("leave_not_group"))
-        text += f"protected: `{str(msg_from.has_protected_content)}" + "`\n"
+        text += f"{lang('id_protected')}: `{str(msg_from.has_protected_content)}`\n"
     if reply:
-        text += "\n" + lang("id_hint") + "\nMessage ID: `" + str(reply.id) + "`"
+        text += f"\n{lang('id_hint')}\n{lang('id_message_id')}: `{str(reply.id)}`"
         if reply.photo and reply.photo.file_id:
-            text += "\nphoto_id: `" + str(reply.photo.file_id) + "`"
+            text += f"\n{lang('id_photo_id')}: `{str(reply.photo.file_id)}`"
         if reply.video and reply.video.file_id:
-            text += "\nvideo_id: `" + str(reply.video.file_id) + "`"
+            text += f"\n{lang('id_video_id')}: `{str(reply.video.file_id)}`"
         if reply.document and reply.document.file_id:
-            text += "\ndocument_id: `" + str(reply.document.file_id) + "`"
+            text += f"\n{lang('id_document_id')}: `{str(reply.document.file_id)}`"
         try:
-            text += "\n\n**User**\nid: `" + str(reply.from_user.id) + "`"
+            text += f"\n\n**{lang('id_user')}**\n{lang('id_chat_id')}: `{str(reply.from_user.id)}`"
             if reply.from_user.is_bot:
-                text += f"\nis_bot: {lang('id_is_bot_yes')}"
+                text += f"\n{lang('id_is_bot')}: {lang('id_is_bot_yes')}"
             try:
-                text += "\nfirst_name: `" + reply.from_user.first_name + "`"
+                text += f"\n{lang('id_first_name')}: `{reply.from_user.first_name}`"
             except TypeError:
                 text += f"\n**{lang('id_da')}**"
             if reply.from_user.last_name:
-                text += "\nlast_name: `" + reply.from_user.last_name + "`"
+                text += f"\n{lang('id_last_name')}: `{reply.from_user.last_name}`"
             if reply.from_user.username:
-                text += "\nusername: @" + reply.from_user.username
+                text += f"\n{lang('id_username')}: @{reply.from_user.username}"
             if reply.from_user.dc_id:
-                text += "\ndc: `" + str(reply.from_user.dc_id) + "`"
+                text += f"\n{lang('id_dc')}: `{str(reply.from_user.dc_id)}`"
         except AttributeError:
             pass
         try:
-            text += "\n\n**Chat**\nid: `" + str(reply.sender_chat.id) + "`"
-            text += "\ntitle: `" + reply.sender_chat.title + "`"
+            text += f"\n\n**{lang('id_chat')}**\n{lang('id_chat_id')}: `{str(reply.sender_chat.id)}`"
+            text += f"\n{lang('id_title')}: `{reply.sender_chat.title}`"
             if reply.sender_chat.username:
-                text += "\nusername: @" + reply.sender_chat.username
+                text += f"\n{lang('id_username')}: @{reply.sender_chat.username}"
         except AttributeError:
             pass
         if reply.forward_from_chat:
             text += (
-                "\n\n**Forward From Channel**\n"
-                "id: `"
-                + str(reply.forward_from_chat.id)
-                + "`\ntitle: `"
-                + reply.forward_from_chat.title
-                + "`"
+                f"\n\n**{lang('id_forward_from_channel')}**\n"
+                f"{lang('id_chat_id')}: `{str(reply.forward_from_chat.id)}`\n"
+                f"{lang('id_title')}: `{reply.forward_from_chat.title}`"
             )
             if reply.forward_from_chat.username:
-                text += "\nusername: @" + reply.forward_from_chat.username
+                text += f"\n{lang('id_username')}: @{reply.forward_from_chat.username}"
             if reply.forward_from_message_id:
-                text += "\nmessage_id: `" + str(reply.forward_from_message_id) + "`"
+                text += f"\n{lang('id_message_id')}: `{str(reply.forward_from_message_id)}`"
             if reply.forward_sender_name:
-                text += "\npost_author: `" + reply.forward_sender_name + "`"
+                text += f"\n{lang('id_post_author')}: `{reply.forward_sender_name}`"
         elif reply.forward_from:
             text += (
-                "\n\n**Forward From User**\nid: `" + str(reply.forward_from.id) + "`"
+                f"\n\n**{lang('id_forward_from_user')}**\n"
+                f"{lang('id_chat_id')}: `{str(reply.forward_from.id)}`"
             )
             try:
                 if reply.forward_from.is_bot:
-                    text += f"\nis_bot: {lang('id_is_bot_yes')}"
+                    text += f"\n{lang('id_is_bot')}: {lang('id_is_bot_yes')}"
                 try:
-                    text += "\nfirst_name: `" + reply.forward_from.first_name + "`"
+                    text += f"\n{lang('id_first_name')}: `{reply.forward_from.first_name}`"
                 except TypeError:
                     text += f"\n**{lang('id_da')}**"
                 if reply.forward_from.last_name:
-                    text += "\nlast_name: `" + reply.forward_from.last_name + "`"
+                    text += f"\n{lang('id_last_name')}: `{reply.forward_from.last_name}`"
                 if reply.forward_from.username:
-                    text += "\nusername: @" + reply.forward_from.username
+                    text += f"\n{lang('id_username')}: @{reply.forward_from.username}"
                 if reply.forward_from.dc_id:
-                    text += "\ndc: `" + str(reply.forward_from.dc_id) + "`"
+                    text += f"\n{lang('id_dc')}: `{str(reply.forward_from.dc_id)}`"
             except AttributeError:
                 pass
         elif reply.forward_sender_name:
             text += (
-                "\n\n**Forward From User**\nsender_name: `"
-                + str(reply.forward_sender_name)
-                + "`"
+                f"\n\n**{lang('id_forward_from_user')}**\n"
+                f"{lang('id_sender_name')}: `{str(reply.forward_sender_name)}`"
             )
     await message.edit(text)
 

@@ -6,14 +6,16 @@
 
 # PagerMaid-Pyro
 
-_✨ 您必备的 Telegram 聊天工具箱 ✨_
+_✨ PagerMaid-Pyro 深度汉化增强版 - 由 @chuanhanhua 维护 ✨_
 
 </div>
 
 <p align="center">
-  <a href="https://xtaolabs.com">文档</a>
+  <a href="https://t.me/chuanhanhua">📢 文档 & 更新</a>
   ·
-  <a href="https://xtaolabs.com">安装</a>
+  <a href="https://t.me/chuanhanhua">
+    <img src="https://img.shields.io/badge/-加入频道获取更新-26A5F2?style=for-the-badge&logo=telegram&logoColor=white" alt="加入频道获取更新">
+  </a>
 </p>
 
 # 简介

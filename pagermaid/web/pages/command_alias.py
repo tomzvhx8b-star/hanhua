@@ -1,26 +1,28 @@
 from amis import Form, InputSubForm, InputText, Static, Alert, PageSchema, Page
 
+from pagermaid.utils._config_utils import lang
+
 main_form = Form(
-    title="命令别名",
+    title=lang('web_command_alias'),
     initApi="get:/pagermaid/api/command_alias",
     api="post:/pagermaid/api/command_alias",
-    submitText="保存",
+    submitText=lang('web_save'),
     body=[
         InputSubForm(
             name="items",
-            label="已设置的命令别名",
+            label=lang('web_command_alias_configured'),
             multiple=True,
             btnLabel="${alias} >> ${command}",
             draggable=True,
             addable=True,
             removable=True,
-            addButtonText="添加命令别名",
+            addButtonText=lang('web_command_alias_add'),
             showErrorMsg=False,
             form=Form(
-                title="命令别名",
+                title=lang('web_command_alias'),
                 body=[
-                    InputText(name="alias", label="命令别名", required=True),
-                    InputText(name="command", label="原命令", required=True),
+                    InputText(name="alias", label=lang('web_command_alias'), required=True),
+                    InputText(name="command", label=lang('web_original_command'), required=True),
                 ],
             ),
         )
@@ -28,15 +30,15 @@ main_form = Form(
 )
 
 test_form = Form(
-    title="测试",
+    title=lang('web_test'),
     api="get:/pagermaid/api/test_command_alias?message=${message}",
-    submitText="测试",
+    submitText=lang('web_test'),
     body=[
-        InputText(name="message", label="测试消息（无需输入逗号前缀）", required=True),
+        InputText(name="message", label=lang('web_test_message_tip'), required=True),
         Static(
             className="text-red-600",
             name="new_msg",
-            label="命令别名修改后消息",
+            label=lang('web_command_alias_modified_message'),
             visibleOn="typeof data.new_msg !== 'undefined'",
         ),
     ],
@@ -47,6 +49,6 @@ tips = Alert(level="info")
 page = PageSchema(
     url="/bot_config/command_alias",
     icon="fa fa-link",
-    label="命令别名",
+    label=lang('web_command_alias'),
     schema=Page(title="", body=[tips, main_form, test_form]),
 )

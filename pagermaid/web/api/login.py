@@ -7,6 +7,7 @@ from pydantic import BaseModel
 from pagermaid.config import Config
 from pagermaid.version import pgm_version_code
 from pagermaid.web.api.utils import create_token
+from pagermaid.utils import lang
 
 
 class UserModel(BaseModel):
@@ -22,10 +23,10 @@ async def login(user: UserModel):
         token = create_token()
         data = {
             "status": 0,
-            "msg": "登录成功",
+            "msg": lang('web_api_login_success'),
             "data": {"version": pgm_version_code, "token": token},
         }
         response = JSONResponse(content=data)
         response.set_cookie(key="token_ck", value=token, expires=1800)
         return response
-    return {"status": -100, "msg": "登录失败，请重新输入密钥"}
+    return {"status": -100, "msg": lang('web_api_login_failed')}

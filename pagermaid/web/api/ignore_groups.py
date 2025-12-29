@@ -3,6 +3,7 @@ from starlette.responses import JSONResponse
 
 from pagermaid.common.ignore import ignore_groups_manager, get_group_list
 from pagermaid.web.api import authentication
+from pagermaid.utils import lang
 
 route = APIRouter()
 
@@ -20,7 +21,7 @@ async def get_ignore_group_list():
             groups.append(data)
         return {"status": 0, "msg": "ok", "data": {"groups": groups}}
     except BaseException:
-        return {"status": -100, "msg": "获取群组列表失败"}
+        return {"status": -100, "msg": lang('web_clear_ignore_failed')}
 
 
 @route.post(
@@ -35,7 +36,7 @@ async def set_ignore_group_status(data: dict):
         ignore_groups_manager.add_id(cid)
     else:
         ignore_groups_manager.del_id(cid)
-    return {"status": 0, "msg": f"成功{'忽略' if status else '取消忽略'} {cid}"}
+    return {"status": 0, "msg": lang('web_ignore_group_success').format(status='忽略' if status else '取消忽略', cid=cid)}
 
 
 @route.post(
@@ -43,4 +44,4 @@ async def set_ignore_group_status(data: dict):
 )
 async def clear_ignore_group():
     ignore_groups_manager.clear_subs()
-    return {"status": 0, "msg": "成功清空忽略列表"}
+    return {"status": 0, "msg": lang('web_clear_ignore_list_success')}

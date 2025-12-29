@@ -5,6 +5,7 @@ from typing import Optional
 from fastapi import Header, HTTPException, Depends, Cookie
 
 from pagermaid.config import Config
+from pagermaid.utils import lang
 
 ALGORITHM = "HS256"
 TOKEN_EXPIRE_MINUTES = 30
@@ -20,7 +21,7 @@ def authentication():
                 jwt.decode(_token, Config.WEB_SECRET_KEY, algorithms=ALGORITHM)
             except (jwt.PyJWTError, jwt.ExpiredSignatureError, AttributeError):
                 raise HTTPException(
-                    status_code=400, detail="登录验证失败或已失效，请重新登录"
+                    status_code=400, detail=lang('web_auth_failed')
                 )
 
     return Depends(inner)

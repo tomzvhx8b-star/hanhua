@@ -20,10 +20,11 @@ from amis import (
 )
 
 from pagermaid.web.html import get_logo
+from pagermaid.utils._config_utils import lang
 
 logo = Html(html=get_logo())
 select_log_num = Select(
-    label="日志数量",
+    label=lang('web_log_count'),
     name="log_num",
     value=100,
     options=[
@@ -37,7 +38,7 @@ select_log_num = Select(
 
 log_page = Log(
     autoScroll=True,
-    placeholder="暂无日志数据...",
+    placeholder=lang('web_no_logs'),
     operation=["stop", "showLineNumber", "filter"],
     source={
         "method": "get",
@@ -55,14 +56,14 @@ cmd_input = Form(
             required=True,
             clearable=True,
             addOn=ActionType.Dialog(
-                label="执行",
+                label=lang('web_execute'),
                 level=LevelEnum.primary,
                 dialog=Dialog(
-                    title="命令执行结果",
+                    title=lang('web_execute_result'),
                     size="xl",
                     body=Log(
                         autoScroll=True,
-                        placeholder="执行命令中，请稍候...",
+                        placeholder=lang('web_execute_command'),
                         operation=["stop", "showLineNumber", "filter"],
                         source={
                             "method": "get",
@@ -84,14 +85,14 @@ eval_input = Form(
             required=True,
             clearable=True,
             addOn=ActionType.Dialog(
-                label="执行",
+                label=lang('web_execute'),
                 level=LevelEnum.primary,
                 dialog=Dialog(
-                    title="命令执行结果",
+                    title=lang('web_execute_result'),
                     size="xl",
                     body=Log(
                         autoScroll=True,
-                        placeholder="执行命令中，请稍候...",
+                        placeholder=lang('web_execute_command'),
                         operation=["stop", "showLineNumber", "filter"],
                         source={
                             "method": "get",
@@ -108,46 +109,46 @@ operation_button = Flex(
     justify="center",
     items=[
         ActionType.Ajax(
-            label="更新",
+            label=lang('web_update'),
             api="/pagermaid/api/bot_update",
-            confirmText="该操作会更新 PagerMaid-Pyro ，请在更新完成后手动重启，请确认执行该操作",
+            confirmText=lang('web_reload_confirm'),
             level=LevelEnum.info,
         ),
         ActionType.Ajax(
-            label="重启",
+            label=lang('web_restart_title'),
             className="m-l",
             api="/pagermaid/api/bot_restart",
-            confirmText="该操作会重启 PagerMaid-Pyro ，请耐心等待重启",
+            confirmText=lang('web_restart_confirm'),
             level=LevelEnum.danger,
         ),
         ActionType.Dialog(
-            label="日志",
+            label=lang('web_logs'),
             className="m-l",
             level=LevelEnum.primary,
             dialog=Dialog(
-                title="查看日志",
+                title=lang('web_logs'),
                 size="xl",
                 actions=[],
                 body=[
                     Alert(
                         level=LevelEnum.info,
-                        body='查看最近最多500条日志，不会自动刷新，需要手动点击两次"暂停键"来进行刷新。',
+                        body=lang('web_log_refresh_tip'),
                     ),
                     Form(body=[Group(body=[select_log_num]), log_page]),
                 ],
             ),
         ),
         ActionType.Dialog(
-            label="shell",
+            label=lang('web_shell'),
             className="m-l",
             level=LevelEnum.warning,
-            dialog=Dialog(title="shell", size="lg", actions=[], body=[cmd_input]),
+            dialog=Dialog(title=lang('web_shell'), size="lg", actions=[], body=[cmd_input]),
         ),
         ActionType.Dialog(
-            label="eval",
+            label=lang('web_eval'),
             className="m-l",
             level=LevelEnum.warning,
-            dialog=Dialog(title="eval", size="lg", actions=[], body=[eval_input]),
+            dialog=Dialog(title=lang('web_eval'), size="lg", actions=[], body=[eval_input]),
         ),
     ],
 )
@@ -155,19 +156,19 @@ operation_button = Flex(
 status = Service(
     api="/pagermaid/api/status",
     body=Property(
-        title="运行信息",
+        title=lang('web_status_info'),
         column=2,
         items=[
-            Property.Item(label="Bot 版本", content="${version}"),
-            Property.Item(label="Bot 运行时间", content="${run_time}"),
-            Property.Item(label="CPU占用率", content="${cpu_percent}"),
-            Property.Item(label="RAM占用率", content="${ram_percent}"),
-            Property.Item(label="SWAP占用率", content="${swap_percent}", span=2),
+            Property.Item(label=lang('web_bot_version'), content="${version}"),
+            Property.Item(label=lang('web_bot_uptime'), content="${run_time}"),
+            Property.Item(label=lang('web_cpu_usage'), content="${cpu_percent}"),
+            Property.Item(label=lang('web_ram_usage'), content="${ram_percent}"),
+            Property.Item(label=lang('web_swap_usage'), content="${swap_percent}", span=2),
         ],
     ),
 )
 
 page_detail = Page(title="", body=[logo, operation_button, Divider(), status])
 page = PageSchema(
-    url="/home", label="首页", icon="fa fa-home", isDefaultPage=True, schema=page_detail
+    url="/home", label=lang('web_home'), icon="fa fa-home", isDefaultPage=True, schema=page_detail
 )

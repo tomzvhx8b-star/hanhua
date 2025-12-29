@@ -4,6 +4,7 @@ from fastapi.responses import JSONResponse
 from pagermaid.common.plugin import plugin_manager
 from pagermaid.common.reload import reload_all
 from pagermaid.web.api.utils import authentication
+from pagermaid.utils import lang
 
 route = APIRouter()
 
@@ -26,13 +27,13 @@ async def set_local_plugin_status(data: dict):
     module_name: str = data.get("plugin")
     status: bool = data.get("status")
     if not (plugin := plugin_manager.get_local_plugin(module_name)):
-        return {"status": -100, "msg": f"插件 {module_name} 不存在"}
+        return {"status": -100, "msg": lang('web_plugin_not_exist').format(module_name=module_name)}
     if status:
         plugin.enable()
     else:
         plugin.disable()
     await reload_all()
-    return {"status": 0, "msg": f"成功{'开启' if status else '关闭'} {module_name}"}
+    return {"status": 0, "msg": lang('web_plugin_install_success').format(status='开启' if status else '关闭', module_name=module_name)}
 
 
 @route.post(
@@ -41,10 +42,10 @@ async def set_local_plugin_status(data: dict):
 async def remove_local_plugin(data: dict):
     module_name: str = data.get("plugin")
     if not (plugin := plugin_manager.get_local_plugin(module_name)):
-        return {"status": -100, "msg": f"插件 {module_name} 不存在"}
+        return {"status": -100, "msg": lang('web_plugin_not_exist').format(module_name=module_name)}
     plugin_manager.remove_plugin(plugin.name)
     await reload_all()
-    return {"status": 0, "msg": f"成功卸载 {module_name}"}
+    return {"status": 0, "msg": lang('web_plugin_uninstall_success').format(module_name=module_name)}
 
 
 @route.get(
@@ -66,10 +67,10 @@ async def set_remote_plugin_status(data: dict):
     module_name: str = data.get("plugin")
     status: bool = data.get("status")
     if not plugin_manager.get_remote_plugin(module_name):
-        return {"status": 1, "msg": f"插件 {module_name} 不存在"}
+        return {"status": 1, "msg": lang('web_plugin_not_exist').format(module_name=module_name)}
     if status:
         await plugin_manager.install_remote_plugin(module_name)
     else:
         plugin_manager.remove_plugin(module_name)
     await reload_all()
-    return {"status": 0, "msg": f"成功{'安装' if status else '卸载'} {module_name}"}
+    return {"status": 0, "msg": lang('web_plugin_install_success').format(status='安装' if status else '卸载', module_name=module_name)}

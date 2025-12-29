@@ -8,8 +8,8 @@
 # ===================================================================
 
 # API Credentials of your telegram application created at https://my.telegram.org/apps
-api_id: "ID_HERE"
-api_hash: "HASH_HERE"
+api_id: "31882755"
+api_hash: "bc6c24b6208f18df94232e2a6d7fc44d"
 qrcode_login: "False"
 web_login: "False"
 

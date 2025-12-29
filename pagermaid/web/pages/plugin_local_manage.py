@@ -1,5 +1,7 @@
 from amis import InputText, Switch, Card, CardsCRUD, PageSchema, Page
 
+from pagermaid.utils._config_utils import lang
+
 card = Card(
     header=Card.Header(
         title="$name", avatarText="$name", avatarTextClassName="overflow-hidden"
@@ -9,8 +11,8 @@ card = Card(
         Switch(
             name="enable",
             value="${status}",
-            onText="启用",
-            offText="禁用",
+            onText=lang('web_plugin_enable'),
+            offText=lang('web_plugin_disable'),
             onEvent={
                 "change": {
                     "actions": [
@@ -32,7 +34,7 @@ card = Card(
                                 },
                                 "onError": {
                                     "type": "tpl",
-                                    "tpl": "操作失败",
+                                    "tpl": lang('web_operation_failed'),
                                 },
                                 "status": "${event.data.value}",
                                 "plugin": "${name}",
@@ -51,10 +53,10 @@ cards_curd = CardsCRUD(
     api="/pagermaid/api/get_local_plugins",
     loadDataOnce=True,
     source="${rows | filter:name:match:keywords_name}",
-    filter={"body": [InputText(name="keywords_name", label="插件名")]},
+    filter={"body": [InputText(name="keywords_name", label=lang('web_plugin_name'))]},
     perPage=12,
     autoJumpToTopOnPagerChange=True,
-    placeholder="暂无插件信息",
+    placeholder=lang('web_plugin_no_info'),
     footerToolbar=["switch-per-page", "pagination"],
     columnsCount=3,
     card=card,
@@ -62,6 +64,6 @@ cards_curd = CardsCRUD(
 page = PageSchema(
     url="/plugins/local",
     icon="fa fa-database",
-    label="本地插件管理",
-    schema=Page(title="本地插件管理", body=cards_curd),
+    label=lang('web_local_plugin'),
+    schema=Page(title=lang('web_local_plugin'), body=cards_curd),
 )

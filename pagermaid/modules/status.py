@@ -139,10 +139,10 @@ async def ping(client: Client, message: Message):
     end = datetime.now()
     ping_duration = (end - start).microseconds / 1000
     start = datetime.now()
-    message = await message.edit("Pong!")
+    message = await message.edit(lang("ping_pong"))
     end = datetime.now()
     msg_duration = (end - start).microseconds / 1000
-    await message.edit(f"Pong!| PING: {ping_duration} | MSG: {msg_duration}")
+    await message.edit(f"{lang('ping_result')}{ping_duration}ms | {lang('msg_duration')}: {msg_duration}ms")
 
 
 def wmic(command: str):
@@ -150,7 +150,7 @@ def wmic(command: str):
     try:
         p = Popen(command.split(" "), stdout=PIPE)
     except FileNotFoundError:
-        return r"WMIC.exe was not found... Make sure 'C:\Windows\System32\wbem' is added to PATH."
+        return lang("sysinfo_wmic_not_found")
 
     stdout, _ = p.communicate()
 
@@ -169,19 +169,19 @@ def get_uptime():
     days, hours = divmod(hours, 24)
 
     def include_s(text: str, num: int):
-        return f"{num} {text}{'' if num == 1 else 's'}"
+        return f"{num} {text}{'' if num == 1 else ''}"
 
-    d = include_s("day", days)
-    h = include_s("hour", hours)
-    m = include_s("minute", minutes)
-    s = include_s("second", seconds)
+    d = include_s(lang("sysinfo_day"), days)
+    h = include_s(lang("sysinfo_hour"), hours)
+    m = include_s(lang("sysinfo_minute"), minutes)
+    s = include_s(lang("sysinfo_second"), seconds)
 
     if days:
-        output = f"{d}, {h}, {m} and {s}"
+        output = f"{d}, {h}, {m} {s}"
     elif hours:
-        output = f"{h}, {m} and {s}"
+        output = f"{h}, {m} {s}"
     elif minutes:
-        output = f"{m} and {s}"
+        output = f"{m} {s}"
     else:
         output = s
 
@@ -236,7 +236,7 @@ def neofetch_win():
     try:
         mboard = f"{mboard_name[-1]} ({mboard_module[-1]})"
     except IndexError:
-        mboard = "Unknown..."
+        mboard = lang("sysinfo_unknown")
     cpu = wmic("wmic cpu get name")[-1]
     gpu = wmic("wmic path win32_VideoController get name")
     gpu = [f"     {g.strip()}" for g in gpu[1:]][0].strip()
@@ -244,6 +244,6 @@ def neofetch_win():
     disks = "\n".join(partitions())
     return (
         f"<code>{user_name}@{host_name}\n---------\nOS: {os}\nUptime: {uptime}\n"
-        f"Motherboard: {mboard}\nCPU: {cpu}\nGPU: {gpu}\nMemory: {ram}\n"
-        f"Disk:\n{disks}</code>"
+        f"{lang('sysinfo_motherboard')}: {mboard}\n{lang('sysinfo_cpu')}: {cpu}\n{lang('sysinfo_gpu')}: {gpu}\n{lang('sysinfo_memory')}: {ram}\n"
+        f"{lang('sysinfo_disk')}:\n{disks}</code>"
     )

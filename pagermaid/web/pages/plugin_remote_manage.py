@@ -1,5 +1,7 @@
 from amis import InputText, Switch, Card, CardsCRUD, PageSchema, Page
 
+from pagermaid.utils._config_utils import lang
+
 card = Card(
     header=Card.Header(
         title="$name",
@@ -12,8 +14,8 @@ card = Card(
         Switch(
             name="enable",
             value="${status}",
-            onText="已安装",
-            offText="未安装",
+            onText=lang('web_plugin_enabled'),
+            offText=lang('web_plugin_disabled'),
             onEvent={
                 "change": {
                     "actions": [
@@ -35,7 +37,7 @@ card = Card(
                                 },
                                 "onError": {
                                     "type": "tpl",
-                                    "tpl": "操作失败",
+                                    "tpl": lang('web_operation_failed'),
                                 },
                                 "status": "${event.data.value}",
                                 "plugin": "${name}",
@@ -56,13 +58,13 @@ cards_curd = CardsCRUD(
     source="${rows | filter:name:match:keywords_name | filter:des:match:keywords_description}",
     filter={
         "body": [
-            InputText(name="keywords_name", label="插件名"),
-            InputText(name="keywords_description", label="插件描述"),
+            InputText(name="keywords_name", label=lang('web_plugin_name')),
+            InputText(name="keywords_description", label=lang('web_plugin_description')),
         ]
     },
     perPage=12,
     autoJumpToTopOnPagerChange=True,
-    placeholder="暂无插件信息",
+    placeholder=lang('web_plugin_no_info'),
     footerToolbar=["switch-per-page", "pagination"],
     columnsCount=3,
     card=card,
@@ -70,6 +72,6 @@ cards_curd = CardsCRUD(
 page = PageSchema(
     url="/plugins/remote",
     icon="fa fa-cloud-download",
-    label="插件仓库",
-    schema=Page(title="插件仓库", body=cards_curd),
+    label=lang('web_plugin_repository'),
+    schema=Page(title=lang('web_plugin_repository'), body=cards_curd),
 )

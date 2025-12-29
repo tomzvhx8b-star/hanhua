@@ -58,7 +58,7 @@ async def profile(client: Client, message: Message):
                 )
             except Exception as exception:
                 raise exception
-    user_type = "Bot" if user.is_bot else lang("profile_user")
+    user_type = lang("profile_bot") if user.is_bot else lang("profile_user")
     username_system = (
         f"@{user.username}" if user.username is not None else lang("profile_noset")
     )

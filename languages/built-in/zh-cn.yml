@@ -80,6 +80,7 @@ profile_bio: 目前已知的情报
 profile_gic: 共同裙
 profile_verified: 官方认证
 profile_restricted: 受限制
+profile_bot: 机器人
 profile_type: 类型
 ## block
 block_des: 拉黑一个用户
@@ -258,9 +259,30 @@ alias_no_exist: 出错了呜呜呜 ~ 原始命令没有被重定向。
 #message
 ## id
 id_des: 获取一条消息的各种信息。
-id_hint: 以下是被回复消息的信息
+id_message_id: 消息ID
+id_chat: 聊天
+id_chat_id: 聊天ID
+id_first_name: 名字
+id_last_name: 姓氏
+id_username: 用户名
+id_is_bot: 是否机器人
 id_is_bot_yes: "是"
-id_da: 死号
+id_is_bot_no: "否"
+id_da: 已注销
+id_title: 标题
+id_topic_title: 话题标题
+id_topic_id: 话题ID
+id_protected: 受保护
+id_photo_id: 图片ID
+id_video_id: 视频ID
+id_document_id: 文件ID
+id_user: 用户
+id_dc: 数据中心
+id_forward_from_channel: 转发自频道
+id_forward_from_user: 转发自用户
+id_sender_name: 发送者名称
+id_post_author: 作者
+id_hint: 以下是被回复消息的信息
 ## uslog
 uslog_des: 转发一条消息到日志。
 uslog_success: 已记录。
@@ -378,6 +400,17 @@ spn_deleted: 删除了
 sysinfo_des: 通过 fastfetch（优先）或 neofetch 检索系统信息。
 sysinfo_loading: 加载系统信息中 . . .
 sysinfo_not_found: 未找到 fastfetch 或 neofetch, 请安装其中一个。
+sysinfo_wmic_not_found: WMIC.exe 未找到...请确保 'C:\\Windows\\System32\\wbem' 已添加到 PATH。
+sysinfo_unknown: 未知
+sysinfo_day: 天
+sysinfo_hour: 小时
+sysinfo_minute: 分钟
+sysinfo_second: 秒
+sysinfo_motherboard: 主板
+sysinfo_cpu: 处理器
+sysinfo_gpu: 显卡
+sysinfo_memory: 内存
+sysinfo_disk: 磁盘
 ## fortune
 fortune_des: 读取 fortune cookies 信息。
 fortune_not_exist: 出错了呜呜呜 ~ 此系统上没有 fortune cookies
@@ -435,6 +468,9 @@ pingdc_4: DC4(荷兰-阿姆斯特丹)
 pingdc_5: DC5(新加坡)
 ## ping
 ping_des: 计算 PagerMaid-Pyro 与 Telegram 之间的封包和信息延迟。
+ping_pong: pong!
+ping_result: "pong! | 延迟: "
+msg_duration: 消息延迟
 ## topcloud
 topcloud_des: 生成一张资源占用的词云图片。
 topcloud_processing: 生成图片中 . . .
@@ -567,19 +603,505 @@ update_plugins: 收到已知的 CVE ，正在强制更新相关插件
 sb_des: 在自己拥有管理员权限的共同群组中封禁一位用户。
 sb_des_auto: 管理自动封禁列表。
 sb_pause: 暂停
-sb_no: 没有在任何群封禁用户
+sb_no: 未封禁用户
 sb_per: 在
-sb_in: 个群封禁了用户
-sb_pro: '受影响的群组'
-sb_no_per: 没有封禁用户权限。
-sb_set: 已被添加到自动封禁列表中。
-sb_remove: 已被移除自动封禁列表。
-sb_exist: 此群组存在于自动封禁列表中。
+sb_in: 群组中封禁用户
+sb_pro: '群组:'
+sb_no_per: 没有封禁用户的权限。
+sb_set: 此群组已被添加到自动封禁列表。
+sb_remove: 此群组已从自动封禁列表中移除。
+sb_exist: 此群组已存在于自动封禁列表中。
 sb_no_exist: 此群组不存在于自动封禁列表中。
-sb_channel: 成功在本群封禁此频道。
+sb_channel: 已在此群组中成功屏蔽此频道。
 #reload
-reload_des: 重新加载内置模块和插件。
-reload_ok: 重新加载内置模块和插件成功。
+reload_des: 重新加载 PagerMaid-Pyro 实例。
+reload_ok: 重新加载成功。
 #conversation
-conversation_already_in_error: 另一个操作正在进行中，请稍等片刻后重试。
-conversation_timed_out_error: 响应超时，请稍等片刻后重试。
+conversation_already_in_error: 已经有另一个对话正在进行中。
+conversation_timed_out_error: 响应超时。
+#web
+web_login_title: 登录 | PagerMaid-Pyro 后台管理
+web_login_password_required: 需要密码
+web_login_password_error: 密码错误
+web_login_success: 登录成功
+web_login_failed: 登录失败，请重新输入密码
+web_login_expired: 登录状态已过期，请重新扫码登录
+web_login_logged: 已登录
+web_login_no_qrcode: 未扫码
+web_login_need_password: 需要密码
+web_login_relogin: 需要重新扫码
+web_login_wrong_password: 密码错误
+web_login_no_password_needed: 无需密码
+web_auth_failed: 登录验证失败或已失效，请重新登录
+web_qrcode_expired: 二维码已过期，请重新获取
+web_qrcode_need_captcha: 需要验证码
+web_qrcode_captcha_error: 验证码错误
+web_not_configured: 未设置 WEB_SECRET_KEY，请将 PagerMaid-Pyro 暴露在公网
+web_server_start_failed: Web Server 启动失败，正在退出
+web_server_start_success: Web Server 启动成功
+web_get_html_template: 获取 HTML 模板
+web_get_logo: 获取 logo
+web_get_github_logo: 获取 github logo
+web_get_footer: 获取 footer
+web_get_web_login: 获取 web login
+web_login_password: 登录密码
+web_system_settings: Bot 设置
+web_plugin_management: 插件管理
+web_command_alias: 命令别名
+web_save: 保存
+web_command_alias_configured: 已配置的命令别名
+web_command_alias_add: 添加命令别名
+web_original_command: 原命令
+web_test: 测试
+web_test_message_tip: 测试消息（无需输入逗号前缀）
+web_command_alias_modified_message: 命令别名修改后消息
+web_plugin_name: 插件名
+web_ignore_groups: 忽略群组
+web_ignored: 已忽略
+web_not_ignored: 未忽略
+web_group_name: 群组名
+web_no_group_list: 群组列表为空
+web_ignore_group_tip: 忽略后，Bot 不再响应指定群组的消息（群组列表将会缓存一小时）
+web_clear_ignore_success: 成功清除忽略列表
+web_clear_ignore_failed: 获取忽略群组列表失败
+web_ignore_group_success: 成功{status} {cid}
+web_no_ignore_group: 无需取消忽略
+web_plugin_need_update: 插件 {module_name} 需要更新
+web_plugin_not_exist: 插件 {module_name} 不存在
+web_plugin_install_success: 成功{status} {module_name}
+web_plugin_install_failed: 插件 {module_name} 安装失败
+web_plugin_loading: 插件加载状态
+web_plugin_no_info: 暂无插件信息
+web_plugin_repository: 插件仓库
+web_local_plugin: 本地插件管理
+web_plugin_enabled: 已安装
+web_plugin_disabled: 未安装
+web_plugin_description: 插件描述
+web_plugin_status: 插件状态
+web_plugin_enable: 启用
+web_plugin_disable: 禁用
+web_plugin_action: 操作
+web_plugin_delete: 卸载
+web_plugin_confirm_delete: 确认卸载 {module_name}
+web_plugin_confirm_disable: 确认禁用 {module_name}
+web_plugin_confirm_enable: 确认启用 {module_name}
+web_plugin_reload: 插件 {module_name} 已{action}，请等待机器人重载
+web_plugin_upload: 上传插件
+web_plugin_upload_success: 插件 {module_name} 上传成功
+web_plugin_local: 本地插件
+web_plugin_remote: 远程插件
+web_plugin_search: 搜索插件
+web_plugin_search_result: 搜索结果
+web_status_info: 状态信息
+web_bot_version: Bot 版本
+web_bot_uptime: Bot 运行时间
+web_cpu_usage: CPU 占用率
+web_ram_usage: RAM 占用率
+web_swap_usage: SWAP 占用率
+web_logs: 日志
+web_log_count: 日志数量
+web_no_logs: 暂无日志数据...
+web_execute_command: 执行命令中，请稍候...
+web_execute_result: 命令执行结果
+web_execute: 执行
+web_shell: Shell
+web_eval: Eval
+web_home: 首页
+web_404: 页面未找到
+web_log_refresh_tip: 查看最近最多500条日志，不会自动刷新，需要手动点击两次"暂停键"来进行刷新。
+web_reload_confirm: 此操作会更新 PagerMaid-Pyro，请等待更新完成后手动重启
+web_reload_title: 重启
+web_restart_confirm: 此操作会重启 PagerMaid-Pyro，请确认执行此操作
+web_restart_title: 重启 PagerMaid-Pyro
+web_restart_success: PagerMaid-Pyro 重启完成
+web_settings: Bot 设置
+web_user_settings: 用户设置
+web_system_settings: 系统设置
+web_backup: 备份
+web_backup_create: 创建备份
+hanhua_des: 显示汉化信息
+hanhua_msg: |
+  『✨ PagerMaid 深度汉化插件已就绪 ✨
+  🔹 功能汉化：已完成（由你亲自汉化）
+  🔹 界面汉化：如果您发现电报 App 界面（设置、菜单等）还是英文，请点击下方链接一键安装官方语言包：
+  👉 [点击此处安装官方中文包](https://t.me/setlanguage/classic-zh-cn)
+  温馨提示：安装后重启电报即可生效。』
+  『汉化维护者：[@chuanhanhua](https://t.me/chuanhanhua)』
+  『📢 关注唯一发布频道：[@chuanhanhua](https://t.me/chuanhanhua)』
+web_backup_download: 下载备份
+web_backup_success: 备份创建成功
+web_backup_failed: 备份创建失败
+web_backup_uploading: 上传备份文件中，请稍候...
+web_backup_restore: 恢复备份
+web_backup_restore_confirm: 确认恢复备份？此操作将覆盖现有数据
+web_backup_restore_success: 备份恢复成功
+web_backup_restore_failed: 备份恢复失败
+web_update: 更新
+web_update_check: 检查更新
+web_update_confirm: 此操作会更新 PagerMaid-Pyro，请等待更新完成后手动重启
+web_update_success: 更新成功，请重启 PagerMaid-Pyro 以应用更新
+web_help: 帮助
+web_documentation: 文档
+web_about: 关于
+web_logout: 退出登录
+web_invalid_command: 无效命令
+web_operation_failed: 操作失败
+web_parse_failed: 解析失败
+web_loading: 加载中...
+web_submit: 提交
+web_cancel: 取消
+web_confirm: 确认
+web_delete: 删除
+web_edit: 编辑
+web_add: 添加
+web_search: 搜索
+web_refresh: 刷新
+web_close: 关闭
+web_backup_db: 备份数据库
+web_backup_db_success: 数据库备份成功
+web_message: 消息
+web_time: 时间
+web_date: 日期
+web_login_title: 登录 | PagerMaid-Pyro 后台管理
+web_login_success: 登录成功
+web_login_failed: 登录失败，请重新输入密码
+web_login_expired: 登录状态已过期，请重新扫码登录
+web_command_alias_save_success: 命令别名保存成功
+web_command_alias_save_failed: 命令别名保存失败
+web_test_success: 测试成功
+web_api_login_success: 登录成功
+web_api_login_failed: 登录失败，请重新输入密钥
+web_plugin_enable_success: 插件 {module_name} 启用成功
+web_plugin_disable_success: 插件 {module_name} 禁用成功
+web_plugin_uninstall_success: 插件 {module_name} 卸载成功
+web_ignore_group_status_success: 成功{action} {cid}
+web_clear_ignore_list_success: 忽略列表清空成功
+web_level: 级别
+web_content: 内容
+web_source: 来源
+web_username: 用户名
+web_password: 密码
+web_confirm_password: 确认密码
+web_email: 邮箱
+web_phone: 电话
+web_address: 地址
+web_description: 描述
+web_name: 名称
+web_title: 标题
+web_link: 链接
+web_size: 大小
+web_type: 类型
+web_status: 状态
+web_created: 创建时间
+web_updated: 更新时间
+web_action: 操作
+web_enabled: 已启用
+web_disabled: 已禁用
+web_all: 全部
+web_none: 无
+web_yes: 是
+web_no: 否
+web_on: 开
+web_off: 关
+web_true: 真
+web_false: 假
+web_unknown: 未知
+web_error: 错误
+web_warning: 警告
+web_info: 信息
+web_success: 成功
+web_failed: 失败
+web_loading: 加载中
+web_processing: 处理中
+web_completed: 已完成
+web_pending: 待处理
+web_rejected: 已拒绝
+web_approved: 已批准
+web_active: 活跃
+web_inactive: 不活跃
+web_online: 在线
+web_offline: 离线
+web_available: 可用
+web_unavailable: 不可用
+web_required: 必填
+web_optional: 可选
+web_hidden: 隐藏
+web_visible: 可见
+web_readonly: 只读
+web_writable: 可写
+web_executable: 可执行
+web_expired: 已过期
+web_valid: 有效
+web_invalid: 无效
+web_pending: 待定
+web_confirmed: 已确认
+web_unconfirmed: 未确认
+web_deleted: 已删除
+web_undeleted: 未删除
+web_archived: 已归档
+web_unarchived: 未归档
+web_synced: 已同步
+web_unsynced: 未同步
+web_copied: 已复制
+web_uncopied: 未复制
+web_moved: 已移动
+web_unmoved: 未移动
+web_renamed: 已重命名
+web_unrenamed: 未重命名
+web_uploaded: 已上传
+web_downloaded: 已下载
+web_installed: 已安装
+web_uninstalled: 未安装
+web_upgraded: 已升级
+web_downgraded: 已降级
+web_enabled: 已启用
+web_disabled: 已禁用
+web_activated: 已激活
+web_deactivated: 未激活
+web_started: 已启动
+web_stopped: 已停止
+web_paused: 已暂停
+web_resumed: 已恢复
+web_blocked: 已屏蔽
+web_unblocked: 未屏蔽
+web_banned: 已封禁
+web_unbanned: 未封禁
+web_muted: 已禁言
+web_unmuted: 未禁言
+web_pinned: 已置顶
+web_unpinned: 未置顶
+web_starred: 已星标
+web_unstarred: 未星标
+web_liked: 已点赞
+web_unliked: 未点赞
+web_shared: 已分享
+web_unshared: 未分享
+web_favorited: 已收藏
+web_unfavorited: 未收藏
+web_reported: 已举报
+web_unreported: 未举报
+web_commented: 已评论
+web_uncommented: 未评论
+web_loved: 已喜爱
+web_unloved: 未喜爱
+web_disliked: 已不喜欢
+web_undisliked: 未不喜欢
+web_recommended: 已推荐
+web_unrecommended: 未推荐
+web_featured: 已精选
+web_unfeatured: 未精选
+web_popular: 热门
+web_trending: 趋势
+web_new: 新
+web_hot: 热门
+web_top: 置顶
+web_recent: 最近
+web_old: 旧
+web_all: 所有
+web_any: 任何
+web_some: 一些
+web_many: 许多
+web_few: 少数
+web_more: 更多
+web_less: 更少
+web_most: 最多
+web_least: 最少
+web_best: 最佳
+web_worst: 最差
+web_good: 好
+web_bad: 差
+web_ok: 确定
+web_cancel: 取消
+web_done: 完成
+web_save: 保存
+web_reset: 重置
+web_clear: 清除
+web_search: 搜索
+web_filter: 筛选
+web_sort: 排序
+web_order: 排序
+web_group: 分组
+web_view: 查看
+web_edit: 编辑
+web_add: 添加
+web_delete: 删除
+web_remove: 移除
+web_move: 移动
+web_copy: 复制
+web_paste: 粘贴
+web_cut: 剪切
+web_undo: 撤销
+web_redo: 重做
+web_select: 选择
+web_select_all: 全选
+web_deselect_all: 取消全选
+web_invert_selection: 反选
+web_expand: 展开
+web_collapse: 折叠
+web_expand_all: 全部展开
+web_collapse_all: 全部折叠
+web_refresh: 刷新
+web_reload: 重载
+web_sync: 同步
+web_import: 导入
+web_export: 导出
+web_upload: 上传
+web_download: 下载
+web_backup: 备份
+web_restore: 恢复
+web_migrate: 迁移
+web_upgrade: 升级
+web_downgrade: 降级
+web_install: 安装
+web_uninstall: 卸载
+web_enable: 启用
+web_disable: 禁用
+web_start: 启动
+web_stop: 停止
+web_pause: 暂停
+web_resume: 继续
+web_restart: 重启
+web_login: 登录
+web_logout: 退出
+web_register: 注册
+web_unregister: 注销
+web_change: 更改
+web_update: 更新
+web_check: 检查
+web_verify: 验证
+web_validate: 校验
+web_test: 测试
+web_send: 发送
+web_receive: 接收
+web_post: 发布
+web_get: 获取
+web_put: 放置
+web_patch: 修补
+web_delete_item: 删除
+web_head: 头部
+web_body: 主体
+web_footer: 底部
+web_header: 标题头
+web_sidebar: 侧边栏
+web_content: 内容
+web_main: 主要
+web_sub: 次要
+web_other: 其他
+web_extra: 额外
+web_custom: 自定义
+web_default: 默认
+web_basic: 基础
+web_advanced: 高级
+web_settings: 设置
+web_configuration: 配置
+web_preference: 首选项
+web_option: 选项
+web_parameter: 参数
+web_argument: 参数
+web_attribute: 属性
+web_property: 属性
+web_field: 字段
+web_column: 列
+web_row: 行
+web_cell: 单元格
+web_table: 表格
+web_list: 列表
+web_item: 项
+web_entry: 条目
+web_record: 记录
+web_data: 数据
+web_info: 信息
+web_message: 消息
+web_notification: 通知
+web_alert: 警报
+web_tip: 提示
+web_help: 帮助
+web_guide: 指南
+web_tutorial: 教程
+web_example: 示例
+web_reference: 参考
+web_documentation: 文档
+web_manual: 手册
+web_instruction: 说明
+web_description: 描述
+web_summary: 摘要
+web_details: 详情
+web_preview: 预览
+web_full: 完整
+web_partial: 部分
+web_total: 总计
+web_partial: 部分
+web_current: 当前
+web_previous: 上一
+web_next: 下一
+web_first: 第一
+web_last: 最后
+web_previous_page: 上一页
+web_next_page: 下一页
+web_go_to_page: 跳转到页
+web_page: 页
+web_of: 共
+web_items: 项
+web_per_page: 每页
+web_total_items: 总项数
+web_total_pages: 总页数
+webShowing: 显示
+web_to: 到
+webShowing_items: 显示 {start} 到 {end} 项，共 {total} 项
+web_no_data: 无数据
+web_no_results: 无结果
+web_loading: 加载中...
+web_error_occurred: 发生错误
+web_please_try_again: 请重试
+web_success: 成功
+web_failed: 失败
+web_warning: 警告
+web_info: 信息
+web_confirm: 确认
+web_yes: 是
+web_no: 否
+web_ok: 确定
+web_cancel: 取消
+web_close: 关闭
+web_submit: 提交
+web_reset: 重置
+web_required: 必填
+web_optional: 可选
+web_username: 用户名
+web_password: 密码
+web_email: 邮箱
+web_phone: 电话
+web_name: 名称
+web_title: 标题
+web_content: 内容
+web_description: 描述
+web_search_placeholder: 搜索...
+web_filter: 筛选
+web_sort: 排序
+web_actions: 操作
+web_select: 选择
+web_selected: 已选择 {count} 项
+web_select_all: 全选
+web_deselect_all: 取消全选
+web_expand: 展开
+web_collapse: 折叠
+web_refresh: 刷新
+web_download: 下载
+web_upload: 上传
+web_add_new: 添加新项
+web_edit_item: 编辑项
+web_delete_item: 删除项
+web_delete_confirm: 确认删除？
+web_delete_warning: 此操作无法撤销。
+web_saved: 已保存
+web_saving: 保存中...
+web_loading_data: 加载数据中...
+web_data_loaded: 数据加载完成
+web_no_data: 无数据
+web_failed_to_load: 加载失败
+web_please_wait: 请稍候...
+web_confirm_action: 确认此操作？
+web_this_cannot_be_undone: 此操作无法撤销。
+web_are_you_sure: 确定吗？
+web_yes_delete: 是，删除
+web_no_keep: 不，保留

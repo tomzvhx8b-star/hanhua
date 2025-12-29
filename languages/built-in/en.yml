@@ -80,6 +80,7 @@ profile_bio: Bio
 profile_gic: Group in common
 profile_verified: Verified
 profile_restricted: Restricted
+d:\Downloads\办公文件\PagerMaid-Pyro\README_ZH.mdprofile_bot: Bot
 profile_type: Type
 ## block
 block_des: Block an user.
@@ -258,9 +259,30 @@ alias_no_exist: Something went wrong, woooo~ The original command is not redirec
 #message
 ## id
 id_des: Get various information about a message.
-id_hint: The following is the information of the reply message
+id_message_id: Message ID
+id_chat: Chat
+id_chat_id: Chat ID
+id_first_name: First Name
+id_last_name: Last Name
+id_username: Username
+id_is_bot: Is Bot
 id_is_bot_yes: "Yes"
-id_da: dead number
+id_is_bot_no: "No"
+id_da: Deactivated
+id_title: Title
+id_topic_title: Topic Title
+id_topic_id: Topic ID
+id_protected: Protected
+id_photo_id: Photo ID
+id_video_id: Video ID
+id_document_id: Document ID
+id_user: User
+id_dc: DC
+id_forward_from_channel: Forward From Channel
+id_forward_from_user: Forward From User
+id_sender_name: Sender Name
+id_post_author: Post Author
+id_hint: The following is the information of the reply message
 ## uslog
 uslog_des: forward a message to the log.
 uslog_success: Logged.
@@ -378,6 +400,17 @@ spn_deleted: deleted
 sysinfo_des: Retrieve system information through fastfetch (preferred) or neofetch.
 sysinfo_loading: Loading system information...
 sysinfo_not_found: Could not find fastfetch or neofetch, please install one of them.
+sysinfo_wmic_not_found: WMIC.exe was not found...Make sure 'C:\\Windows\\System32\\wbem' is added to PATH.
+sysinfo_unknown: Unknown
+sysinfo_day: day
+sysinfo_hour: hour
+sysinfo_minute: minute
+sysinfo_second: second
+sysinfo_motherboard: Motherboard
+sysinfo_cpu: CPU
+sysinfo_gpu: GPU
+sysinfo_memory: Memory
+sysinfo_disk: Disk
 ## fortune
 fortune_des: read fortune cookies information.
 fortune_not_exist: Something went wrong, woooo~ There are no fortune cookies on this system
@@ -435,6 +468,9 @@ pingdc_4: DC4(Amsterdam,NL)
 pingdc_5: DC5(Singapore)
 ## ping
 ping_des: Estimate ping between Telegram and PagerMaid-Pyro (Message and Packet)
+ping_pong: Pong!
+ping_result: "Pong! | PING: "
+msg_duration: Message Latency
 ## topcloud
 topcloud_des: Generate a word cloud picture of resource usage.
 topcloud_processing: generating pictures...
@@ -583,3 +619,43 @@ reload_ok: Successfully reloaded.
 #conversation
 conversation_already_in_error: Another conversation is already in progress.
 conversation_timed_out_error: Response timed out.
+#web
+web_shell: Shell
+web_eval: Eval
+web_home: Home
+web_404: Page Not Found
+web_login_title: Login | PagerMaid-Pyro Admin
+web_login_logged: Already Logged In
+web_login_no_qrcode: No QR Code Scanned
+web_login_need_password: Password Required
+web_login_relogin: Please Rescan QR Code
+web_login_wrong_password: Wrong Password
+web_login_no_password_needed: No Password Required
+web_login_success: Login Successful
+web_login_failed: Login Failed, Please Try Again
+web_login_expired: Login Expired, Please Rescan
+web_login_password: Login Password
+web_get_web_login: Get Web Login
+web_command_alias: Command Alias
+web_command_alias_configured: Configured Command Aliases
+web_command_alias_add: Add Command Alias
+web_command_alias_save_success: Command Alias Saved Successfully
+web_command_alias_save_failed: Failed to Save Command Alias
+web_test: Test
+web_test_message_tip: Test Message (No Comma Prefix Required)
+web_test_success: Test Successful
+web_command_alias_modified_message: Modified Message After Command Alias
+web_api_login_success: Login Successful
+web_api_login_failed: Login Failed, Please Enter Correct Key
+web_plugin_enable_success: Plugin {module_name} Enabled Successfully
+web_plugin_disable_success: Plugin {module_name} Disabled Successfully
+web_plugin_uninstall_success: Plugin {module_name} Uninstalled Successfully
+web_ignore_group_status_success: Successfully {action} {cid}
+web_clear_ignore_list_success: Ignore List Cleared Successfully
+hanhua_des: Show localization information
+hanhua_msg: |
+  『✨ PagerMaid Localization Plugin Ready ✨
+  🔹 Function Localization: Completed (localized by you)
+  🔹 Interface Localization: If you still see English in the Telegram App interface (settings, menus, etc.), please click the link below to install the official language package:
+  👉 [Click Here to Install Official Chinese Language Pack](https://t.me/setlanguage/classic-zh-cn)
+  Tip: Restart Telegram after installation to apply changes.』

@@ -7,6 +7,8 @@ from amis import (
     Page,
 )
 
+from pagermaid.utils._config_utils import lang
+
 card = Card(
     header=Card.Header(
         title="$title",
@@ -19,8 +21,8 @@ card = Card(
         Switch(
             name="enable",
             value="${status}",
-            onText="已忽略",
-            offText="未忽略",
+            onText=lang('web_ignored'),
+            offText=lang('web_not_ignored'),
             onEvent={
                 "change": {
                     "actions": [
@@ -38,11 +40,11 @@ card = Card(
                                 },
                                 "onSuccess": {
                                     "type": "tpl",
-                                    "tpl": "${payload.msg}",  # 使用返回的 msg 字段作为成功消息
+                                    "tpl": "${payload.msg}",
                                 },
                                 "onError": {
                                     "type": "tpl",
-                                    "tpl": "操作失败",
+                                    "tpl": lang('web_operation_failed'),
                                 },
                                 "status": "${event.data.value}",
                                 "id": "${id}",
@@ -61,10 +63,10 @@ cards_curd = CardsCRUD(
     api="/pagermaid/api/get_ignore_group_list",
     loadDataOnce=True,
     source="${groups | filter:title:match:keywords_name}",
-    filter={"body": [InputText(name="keywords_name", label="群组名")]},
+    filter={"body": [InputText(name="keywords_name", label=lang('web_group_name'))]},
     perPage=12,
     autoJumpToTopOnPagerChange=True,
-    placeholder="群组列表为空",
+    placeholder=lang('web_no_group_list'),
     footerToolbar=["switch-per-page", "pagination"],
     columnsCount=3,
     card=card,
@@ -72,10 +74,10 @@ cards_curd = CardsCRUD(
 page = PageSchema(
     url="/bot_config/ignore_groups",
     icon="fa fa-ban",
-    label="忽略群组",
+    label=lang('web_ignore_groups'),
     schema=Page(
-        title="忽略群组",
-        subTitle="忽略后，Bot 不再响应指定群组的消息（群组列表将会缓存一小时）",
+        title=lang('web_ignore_groups'),
+        subTitle=lang('web_ignore_group_tip'),
         body=cards_curd,
     ),
 )

@@ -11,6 +11,7 @@ from amis import (
 )
 
 from pagermaid.web.html import get_logo
+from pagermaid.utils._config_utils import lang
 
 logo = Html(html=get_logo())
 login_api = AmisAPI(
@@ -30,8 +31,8 @@ login_form = Form(
     body=[
         InputPassword(
             name="password",
-            label="密码",
-            labelRemark=Remark(shape="circle", content="登录密码"),
+            label=lang('web_password'),
+            labelRemark=Remark(shape="circle", content=lang('web_login_password')),
         ),
     ],
     mode=DisplayModeEnum.horizontal,

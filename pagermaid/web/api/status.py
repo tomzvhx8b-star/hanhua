@@ -8,6 +8,7 @@ from pagermaid.common.status import get_status
 from pagermaid.common.system import run_eval
 from pagermaid.utils import execute
 from pagermaid.web.api.utils import authentication
+from pagermaid.utils._config_utils import lang
 
 route = APIRouter()
 
@@ -36,7 +37,7 @@ async def run_cmd(cmd: str = ""):
             yield i + "\n"
             await asyncio.sleep(0.02)
 
-    return StreamingResponse(run_cmd_func()) if cmd else "无效命令"
+    return StreamingResponse(run_cmd_func()) if cmd else lang('web_invalid_command')
 
 
 @route.get("/run_sh", dependencies=[authentication()])
@@ -47,7 +48,7 @@ async def run_sh(cmd: str = ""):
             yield i + "\n"
             await asyncio.sleep(0.02)
 
-    return StreamingResponse(run_sh_func()) if cmd else "无效命令"
+    return StreamingResponse(run_sh_func()) if cmd else lang('web_invalid_command')
 
 
 @route.get("/status", response_class=JSONResponse, dependencies=[authentication()])

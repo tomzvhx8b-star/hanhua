@@ -1,6 +1,7 @@
 from amis import App, PageSchema, Tpl, Page, Flex
 
 from pagermaid.web.html import get_footer, get_github_logo
+from pagermaid.utils._config_utils import lang
 from pagermaid.web.pages.command_alias import page as command_alias_page
 from pagermaid.web.pages.ignore_groups import page as ignore_groups_page
 from pagermaid.web.pages.home_page import page as home_page
@@ -23,12 +24,12 @@ admin_app = App(
             "children": [
                 home_page,
                 PageSchema(
-                    label="Bot 设置",
+                    label=lang('web_system_settings'),
                     icon="fa fa-wrench",
                     children=[command_alias_page, ignore_groups_page],
                 ),
                 PageSchema(
-                    label="插件管理",
+                    label=lang('web_plugin_management'),
                     icon="fa fa-cube",
                     children=[plugin_local_manage_page, plugin_remote_manage_page],
                 ),
@@ -37,4 +38,4 @@ admin_app = App(
     ],
     footer=get_footer(),
 )
-blank_page = Page(title="PagerMaid-Pyro 404", body="404")
+blank_page = Page(title=lang('web_404'), body="404")

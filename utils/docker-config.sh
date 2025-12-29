@@ -14,12 +14,9 @@ configure () {
     echo "生成配置文件中 . . ."
     cp config.gen.yml $config_file
     sed -i "s/127.0.0.1/0.0.0.0/" $config_file
-    printf "请输入应用程序 api_id（不懂请直接回车）："
-    read -r api_id <&1
-    sed -i "s/ID_HERE/$api_id/" $config_file
-    printf "请输入应用程序 api_hash（不懂请直接回车）："
-    read -r api_hash <&1
-    sed -i "s/HASH_HERE/$api_hash/" $config_file
+    sed -i 's/enable: "False"/enable: "True"/' $config_file
+    echo "已使用预配置的 API 凭证"
+    echo "Web 界面已自动启用"
     printf "控制台二维码扫码登录？（避免无法收到验证码） [Y/n]"
     read -r choi <&1
     if [ "$choi" == "y" ] || [ "$choi" == "Y" ]; then
