@@ -121,7 +121,6 @@ config.yml
 *.pagermaid
 pagermaid*.tar.gz
 docker-compose.yml
-plugins*/
 data/
 pagermaid.egg-info/
 dump.rdb
