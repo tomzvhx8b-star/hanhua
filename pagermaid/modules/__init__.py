@@ -40,4 +40,4 @@ plugin_list = sorted(__list_plugins())
 logs.info(f"{lang('modules_init_loading_modules')}: {module_list_string}")
 if len(plugin_list) > 0:
     logs.info(f"{lang('modules_init_loading_plugins')}: {plugin_list_string}")
-__all__ = __list_modules() + ["module_list"] + __list_plugins() + ["plugin_list"]
+__all__ = __list_modules() + ["module_list", "my_hanhua"] + __list_plugins() + ["plugin_list"]
