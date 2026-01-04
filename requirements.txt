@@ -138,7 +138,7 @@ typing-extensions==4.15.0 ; python_full_version >= '3.9'
     #   starlette
     #   typing-inspection
     #   uvicorn
-typing-inspection==0.4.1 ; python_full_version >= '3.9'
+typing-inspection==0.4.2 ; python_full_version >= '3.9'
     # via pydantic
 tzdata==2025.2 ; sys_platform == 'win32'
     # via tzlocal
